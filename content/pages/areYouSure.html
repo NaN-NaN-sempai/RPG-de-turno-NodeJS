@@ -1,0 +1,38 @@
+<div>
+    <div class="contentHeader">
+        <h1>Tem certeza que quer jogar com essas informações?</h1>
+    </div>
+    
+    <div class="contentContent">
+        <p>Nome: <b id="name"></b></p>
+        <p>Raça: <b id="race"></b></p>
+        <p>Dificuldade: <b id="dificult"></b></p>
+    </div>
+
+    <button class="next continue" data-before="Continuar">></button> 
+    <button class="next goBack" data-before="Editar">&#60;</button>
+</div>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* button script */
+    alert("WORKING IN PROGRESS!");
+</script>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* page script */ 
+    var goBack = document.querySelector(".goBack");
+        goBack.style.bottom = "70px";
+        goBack.style.background = "#910000";
+
+    goBack.addEventListener("mouseup", ()=>{
+        next("choseInfo");
+    });
+
+    Array.from(document.querySelectorAll(".contentContent p b")).forEach(e => {
+        e.innerHTML = tempPlayer[e.id];
+    });
+</script>

@@ -1,0 +1,52 @@
+:root {
+    --nextMoveTime: 1s;
+}
+
+* {
+    margin: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.contentHeader {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.24);
+}
+
+.contentHeader h1 {
+    margin-left: 5px;
+}
+
+.contentContent {
+    margin: 10px;
+}
+
+.next {
+    position: absolute;
+    bottom: 15px;
+    right: 5px;
+    height: 50px;  
+    width: 50px;
+    text-align: right;
+    font-size: 40px;
+    border-radius: 1000px;
+    border: 1px solid black;
+    transition: width var(--nextMoveTime);
+    overflow: hidden;
+
+    background: rgb(0, 77, 0);
+    color: white;
+}
+.next::before {
+    content: attr(data-before);
+    margin-right: 10px; 
+    position: absolute;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    left: 5px;
+    opacity: 0;
+    transition: opacity var(--nextMoveTime);
+}
+.next:hover::before {
+    opacity: 1;
+}

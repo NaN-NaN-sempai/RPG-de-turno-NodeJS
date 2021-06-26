@@ -1,0 +1,63 @@
+<div>
+    <div class="contentHeader">
+        <h1>Escolha suas informações</h1>
+    </div>
+    
+    <div class="contentContent">
+        <div class="sendInfo" id="name">
+            <span>Nome: </span>
+            <input placeholder="Digíte seu nome" type="text">
+        </div> 
+
+        <div class="sendInfo" id="race">
+            <span>Raça: </span>
+            <select></select>
+        </div> 
+
+        <div class="sendInfo" id="dificult">
+            <span>Dificuldade: </span>
+            <select>
+                <option value="Working in progress!">Working in progress!</option>
+            </select>
+        </div> 
+    
+        <button class="next continue" data-before="Continuar">></button>
+    </div>
+
+</div>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* button script */
+    if(["", " "].includes(document.getElementById("name").querySelector("input").value)){
+        document.getElementById("name").querySelector("input").value = "Defeult Name";
+    }
+
+    Array.from(document.querySelectorAll(".sendInfo")).forEach(e=>{
+        tempPlayer[e.id] = (e.querySelector("input")? e.querySelector("input"): e.querySelector("select")).value;
+    });
+    
+    next("areYouSure");
+</script>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* page script */
+
+    serverData.races.forEach(e=>{
+        var option = document.createElement("option");
+            option.value = option.innerHTML = e.name;
+        document.getElementById("race").querySelector("select").append(option);
+    });
+
+
+    var accesIpt = (id) => {
+        return document.getElementById(id).querySelector("input");
+    }
+
+    if(typeof tempPlayer.name != "undefined"){
+        accesIpt("name").value = tempPlayer.name;
+    } 
+</script>

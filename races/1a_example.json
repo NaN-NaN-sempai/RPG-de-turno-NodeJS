@@ -1,0 +1,7 @@
+{
+    "name": "example",
+    "bonuses": {
+        "hp": 0,
+        "mp": 0
+    }
+}
