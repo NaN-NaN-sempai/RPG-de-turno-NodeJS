@@ -1,14 +1,18 @@
 console.clear();
 
 var express = require("express");
+var bodyParser = require('body-parser');
 var app = express();
 
 var classes = require("./classes");
+var races = require("./races");
 
 var fs = require("fs");
 
-var races = require("./races");
+var randomOperations = require("./myModules/randomOperations");
+var generateRandomName = require("./myModules/randomNameGenerator");
 
+ 
 
 var pages = [];
 var pagesIndex = "./content/pages";
@@ -35,8 +39,8 @@ fs.watch(pagesIndex, () => {
 
 
 
-
-
+app.use(bodyParser.json());
+ 
 app.use(express.static(__dirname+'/content'))
 
 app.get('/', (req, res) => {
@@ -45,15 +49,28 @@ app.get('/', (req, res) => {
 
 
 
+app.post('/randomOperations', (req, res)=> {
+    var operation = Object.entries(req.body)[0];
+    
+    if(randomOperations[operation[0]]){
+        var ret = randomOperations[operation[0]](operation[1][0], operation[1][1]);
+        res.json(ret);
+    }
+     
+    res.end();
+})
 
-
-var player = {name: "Link, the Hylian"};
+app.post('/randomName', (req, res)=> {
+    var obj = req.body;
+    res.json(generateRandomName(obj));
+    res.end();
+});
 
 app.get("/serverData", (req, res) => {
     res.json({
-        player: player,
         races: races,
-        pages: pages
+        pages: pages,
+        randomOperations: randomOperations.evalText
     });
     res.end();
 });
