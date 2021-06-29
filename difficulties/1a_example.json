@@ -1,0 +1,12 @@
+{
+    "name": "example",
+    "store": {
+        "distanceToNext": 0,
+        "intemQuantity": 0
+    },
+    "chest": {
+        "onStart": true,
+        "rarity": 0,
+        "intemQuantity": 0
+    }
+}

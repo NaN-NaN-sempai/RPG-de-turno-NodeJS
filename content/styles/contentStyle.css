@@ -13,11 +13,21 @@
 }
 
 .contentHeader h1 {
-    margin-left: 5px;
+    text-align: center;
 }
 
 .contentContent {
     margin: 10px;
+}
+
+.contentFooter {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.24);
+}
+.contentFooter h1 {
+    text-align: center;
 }
 
 .next {

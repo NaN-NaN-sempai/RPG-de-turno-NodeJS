@@ -14,11 +14,9 @@
             <select></select>
         </div> 
 
-        <div class="sendInfo" id="dificult">
+        <div class="sendInfo" id="difficult">
             <span>Dificuldade: </span>
-            <select>
-                <option value="Working in progress!">Working in progress!</option>
-            </select>
+            <select></select>
         </div> 
     
         <button class="next continue" data-before="Continuar">></button>
@@ -30,12 +28,12 @@
 <!-- SPLIT FOR SCRIPT -->
 <script>
     /* button script */
-    if(["", " "].includes(document.getElementById("name").querySelector("input").value)){
-        document.getElementById("name").querySelector("input").value = "Defeult Name";
+    if(["", " "].includes(document.getElementById("name").querySelector("input").value.trim())){
+        document.getElementById("name").querySelector("input").value = "Default Name";
     }
 
     Array.from(document.querySelectorAll(".sendInfo")).forEach(e=>{
-        tempPlayer[e.id] = (e.querySelector("input")? e.querySelector("input"): e.querySelector("select")).value;
+        tempOptions[e.id] = (e.querySelector("input") || e.querySelector("select")).value;
     });
     
     next("areYouSure");
@@ -46,10 +44,16 @@
 <script>
     /* page script */
 
-    serverData.races.forEach(e=>{
+    serverData.modules.races.forEach(e=>{
         var option = document.createElement("option");
             option.value = option.innerHTML = e.name;
         document.getElementById("race").querySelector("select").append(option);
+    });
+
+    serverData.modules.difficulties.forEach(e=>{
+        var option = document.createElement("option");
+            option.value = option.innerHTML = e.name;
+        document.getElementById("difficult").querySelector("select").append(option);
     });
 
 
@@ -57,7 +61,7 @@
         return document.getElementById(id).querySelector("input");
     }
 
-    if(typeof tempPlayer.name != "undefined"){
-        accesIpt("name").value = tempPlayer.name;
+    if(typeof tempOptions.name != "undefined"){
+        accesIpt("name").value = tempOptions.name;
     } 
 </script>

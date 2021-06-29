@@ -6,6 +6,7 @@ var app = express();
 
 var classes = require("./classes");
 var races = require("./races");
+var difficulties = require("./difficulties");
 
 var fs = require("fs");
 
@@ -66,9 +67,23 @@ app.post('/randomName', (req, res)=> {
     res.end();
 });
 
+app.post('/newEntity', (req, res)=> { 
+    var operation = req.body; 
+    
+    if(classes[operation[0]]){ 
+        var ret = new classes[operation[0]](operation[1]); 
+        res.json(ret);
+    }
+     
+    res.end();
+});
+
 app.get("/serverData", (req, res) => {
     res.json({
-        races: races,
+        modules: {
+            races: races,
+            difficulties: difficulties
+        },
         pages: pages,
         randomOperations: randomOperations.evalText
     });

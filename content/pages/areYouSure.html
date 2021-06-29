@@ -6,7 +6,7 @@
     <div class="contentContent">
         <p>Nome: <b id="name"></b></p>
         <p>Raça: <b id="race"></b></p>
-        <p>Dificuldade: <b id="dificult"></b></p>
+        <p>Dificuldade: <b id="difficult"></b></p>
     </div>
 
     <button class="next continue" data-before="Continuar">></button> 
@@ -17,7 +17,15 @@
 <!-- SPLIT FOR SCRIPT -->
 <script>
     /* button script */
-    next("startHistory");
+    newEntity("entity", {
+        name: tempOptions.name,
+        race: tempOptions.race
+    }, e=>{
+        game.player = e;
+        game.difficult = serverData.modules.difficulties.find(e=>e.name == tempOptions.difficult);
+        game.steps = game.stepsToStore = 1;
+        goTo("beginning");
+    }); 
 </script>
 
 
@@ -33,6 +41,6 @@
     });
 
     Array.from(document.querySelectorAll(".contentContent p b")).forEach(e => {
-        e.innerHTML = tempPlayer[e.id];
+        e.innerHTML = tempOptions[e.id];
     });
 </script>

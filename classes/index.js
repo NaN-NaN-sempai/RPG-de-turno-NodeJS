@@ -1,5 +1,6 @@
 var weapons = require("../weapons");
 var races = require("../races")
+var generateRandomName = require("../myModules/randomNameGenerator");
 
 class weapon{
     constructor(index){
@@ -34,13 +35,13 @@ class entity extends race {
 
         super(obj.race? obj.race: "Human");
 
-        this.name = obj.name;
+        this.name = obj.name?obj.name:generateRandomName();
 
-        this.fullHp = obj.fullHp;
-        this.hp = obj.hp? obj.hp: obj.fullHp;
+        this.fullHp = obj.fullHp || 100;
+        this.hp = obj.hp || this.fullHp;
 
-        this.fullMp = obj.fullMp;
-        this.mp = obj.mp? obj.mp: obj.fullMp;
+        this.fullMp = obj.fullMp || 100;
+        this.mp = obj.mp || this.fullMp;
 
         this.inventory = [new weapon("Hands")];
         this.equiped = this.inventory[0];

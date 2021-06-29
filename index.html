@@ -41,7 +41,9 @@
     var container = document.getElementById("mainCon");
     var serverData;
 
-    var tempPlayer = {};
+    var tempOptions = {};
+
+    var game = {};
 
     axios.get("/serverData").then(e=>{ 
         serverData = e.data;
@@ -52,6 +54,9 @@
     var randomName = (obj, callbackFunction) => {
         axios.post("/randomName", typeof obj != "object"?undefined: obj).then(e => (typeof obj == "function"?obj:callbackFunction)(e.data));
     }
+    var newEntity = (type, obj, callbackFunction) => {
+        axios.post("/newEntity", [type, typeof obj != "object"?undefined: obj]).then(e => (typeof obj == "function"?obj:callbackFunction)(e.data));
+    } 
 
 
     var pageHistory = [];
@@ -74,6 +79,15 @@
             if(typeof page.script != "undefined"){
                 eval(page.script); 
             }
+        }
+    }
+    var goTo = (name) => {
+        if(name == "random"){
+            var places = serverData.pages.filter(e=>e.name.includes("place_") && !e.name.includes("beginning"));
+        } else { 
+            var allPlaces = serverData.pages.filter(e=>e.name.includes("place_")); 
+            var page = allPlaces.find(e=>e.name == "place_"+name);
+            next(page.name);
         }
     }
 
