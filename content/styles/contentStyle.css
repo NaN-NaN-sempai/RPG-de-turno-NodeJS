@@ -1,15 +1,31 @@
 :root {
     --nextMoveTime: 1s;
+    --containterBGC: rgba(0, 0, 0, 0.24);
+    --mainColor: burlywood;
+    --mainColorDark: rgb(141, 114, 78);
+    --mainColorLight: rgb(248, 206, 150);
 }
 
 * {
+    outline: none;
     margin: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.innerMainCon {
+    background: var(--mainColor);
+    height: 100%;
+}
+
+.subContainer {
+    width: 100%;
+    background: var(--containterBGC);
+    margin-top: 10px;
+}
+
 .contentHeader {
     width: 100%;
-    background: rgba(0, 0, 0, 0.24);
+    background: var(--containterBGC);
 }
 
 .contentHeader h1 {
@@ -17,14 +33,14 @@
 }
 
 .contentContent {
-    margin: 10px;
+    padding: 10px;
 }
 
 .contentFooter {
     position: absolute;
     bottom: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.24);
+    background: var(--containterBGC);
 }
 .contentFooter h1 {
     text-align: center;
@@ -39,7 +55,7 @@
     text-align: right;
     font-size: 40px;
     border-radius: 1000px;
-    border: 1px solid black;
+    border: 2px solid black;
     transition: width var(--nextMoveTime);
     overflow: hidden;
 
@@ -59,4 +75,33 @@
 }
 .next:hover::before {
     opacity: 1;
+}
+
+.placeInfo {
+    padding-bottom: 5px;
+}
+.placeInfo h2, .placeInfo p {
+    text-align: center;
+}
+
+.actions {
+    display: flex;  
+    grid-template-columns: auto auto auto auto; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.actions button {
+    width: 100px;  
+    height: 100px;  
+    margin: 5px;
+    border-radius: 20px;
+    border: solid black 2px;
+    background: var(--mainColorLight);
+}
+.actions button:hover {
+    background: var(--mainColor);
+}
+.actions button:active {
+    background: var(--mainColorDark);
 }

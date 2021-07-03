@@ -1,0 +1,37 @@
+<div class="innerMainCon">
+    <div class="contentHeader">
+        <h1>Ações</h1>
+    </div>
+    
+    <div class="contentContent">
+        <div class="subContainer placeInfo"></div>
+        <div class="subContainer actions">
+            <button>Inspecionar local</button>
+            <button>Checar inventario</button>
+            <button>Continuar andando</button>
+        </div>
+    </div>
+
+    <div class="contentFooter" title="Distancia que você percorreu">
+        <h1 id="steps"></h1>
+    </div> 
+</div>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* button script */ 
+</script>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* page script */
+    var placeInfo = document.querySelector(".placeInfo");
+    placeInfo.innerHTML += "<h2>"+game.placeInfo.title+"</h2>";
+    placeInfo.innerHTML += "<p>"+game.placeInfo.desc+"</p>";
+    
+    document.getElementById("steps").innerHTML = game.steps;
+
+    Array.from(document.querySelector(".subContainer.actions").querySelectorAll("button")).forEach(e=>e.onclick = ()=>alert("Working in progress"));
+</script>

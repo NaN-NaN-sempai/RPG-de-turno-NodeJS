@@ -15,8 +15,7 @@
         }
         #mainCon {
             width: 80%;
-            height: 90%;
-            background: burlywood;
+            height: 90%; 
             position: absolute;
             left: 50%;
             top: 50%;
@@ -49,6 +48,7 @@
         serverData = e.data;
         console.log(serverData);
         eval(serverData.randomOperations);
+        //goTo("beginning")
         next("choseInfo");
     });
     var randomName = (obj, callbackFunction) => {

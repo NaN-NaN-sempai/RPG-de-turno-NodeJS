@@ -1,13 +1,16 @@
-<div>
+<div class="innerMainCon">
     <div class="contentHeader">
         <h1>Você acorda</h1>
     </div>
     
     <div class="contentContent">
-        <p>Você esta meio desnorteado, pare e pense um pouco no que fazer.</p>
+        <p class="placeTitle">Um lugar estranho...</p>
+        <br>
+        <p class="placeDesc">Você esta meio desnorteado, em uma grande pedra negra no meio de uma floresta escura.</p>
+        <p>Pare e pense um pouco no que fazer.</p>
     </div>
 
-    <div class="contentFooter">
+    <div class="contentFooter" title="Distancia que você percorreu">
         <h1 id="steps"></h1>
     </div>
 
@@ -19,11 +22,17 @@
 <script>
     /* button script */
     console.log("Example button LOG");
+    next("actions");
 </script>
 
 
 <!-- SPLIT FOR SCRIPT -->
 <script>
     /* page script */
-    document.getElementById("steps").innerHTML = game.steps;
+    
+    game.placeInfo = {
+        title: document.querySelector(".placeTitle").innerHTML,
+        desc: document.querySelector(".placeDesc").innerHTML
+    }
+    document.getElementById("steps").innerHTML = game.steps; 
 </script>
