@@ -24,6 +24,7 @@
         }
     </style>
     <link rel="stylesheet" href="./styles/contentStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body> 
     
@@ -107,7 +108,7 @@
 
             Array.from(nextButton).forEach(e=>{   
                 e.addEventListener("mouseover", ()=>{ 
-                    var calc = ((e.dataset.before.length * 21) + 50) + "px";
+                    var calc = ((e.dataset.before.length * 22) + 50) + "px";
                     e.style.width = calc; 
                 });
                 e.addEventListener("mouseout", ()=>{

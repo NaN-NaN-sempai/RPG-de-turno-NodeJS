@@ -20,6 +20,7 @@
         </div> 
     
         <button class="next continue" data-before="Continuar">></button>
+        <button class="next goBack" data-before="Carregar"><i class="fa fa-folder"></i></button>
     </div>
 
 </div>
@@ -64,4 +65,8 @@
     if(typeof tempOptions.name != "undefined"){
         accesIpt("name").value = tempOptions.name;
     } 
+
+    document.querySelector(".goBack").addEventListener("mouseup", ()=>{
+        alert("Working in progress!")
+    });
 </script>

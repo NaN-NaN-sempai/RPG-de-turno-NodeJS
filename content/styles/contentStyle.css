@@ -56,11 +56,15 @@
     font-size: 40px;
     border-radius: 1000px;
     border: 2px solid black;
-    transition: width var(--nextMoveTime);
+    transition: width cubic-bezier(0.42, 0, 0.56, 1.65) var(--nextMoveTime);
     overflow: hidden;
 
     background: rgb(0, 77, 0);
     color: white;
+}
+.next.goBack {
+    background: #910000;
+    bottom: 70px;
 }
 .next::before {
     content: attr(data-before);

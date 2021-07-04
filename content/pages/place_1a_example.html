@@ -1,0 +1,44 @@
+<div class="innerMainCon">
+    <div class="contentHeader">
+        <h1>Titulo</h1>
+    </div>
+    
+    <div class="contentContent">
+        <i><p class="placeTitle">Subtitulo</p></i>
+        <br>
+        <p class="placeDesc">descrição do local</p>
+        <p>subdescrição do local</p>
+    </div>
+
+    <div class="contentFooter" title="Distancia que você percorreu">
+        <h1 id="steps"></h1>
+    </div>
+
+    <button class="next continue" data-before="Ações">></button>
+</div>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* button script */
+    next("actions");
+</script>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* page script */
+
+    game.placeInfo = {
+        title: document.querySelector(".placeTitle").innerHTML,
+        desc: document.querySelector(".placeDesc").innerHTML
+    }
+    if(game.inspectPlace){
+        document.getElementById("steps").innerHTML = game.steps;
+        document.querySelector(".contentContent").innerHTML = `<div class='subContainer placeInfo'> <h2>`+document.querySelector(".contentHeader h1").innerHTML+`</h2> <br>` +document.querySelector(".contentContent").innerHTML+ `</div>`;
+        document.querySelector(".contentHeader h1").innerHTML = "Inspecionando";
+        game.inspectPlace = false;
+    } else {
+        document.getElementById("steps").innerHTML = ++game.steps;
+    }
+</script>
