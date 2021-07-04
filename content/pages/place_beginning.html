@@ -4,7 +4,7 @@
     </div>
     
     <div class="contentContent">
-        <p class="placeTitle">Um lugar estranho...</p>
+        <i><p class="placeTitle">Um lugar estranho...</p></i>
         <br>
         <p class="placeDesc">Você esta meio desnorteado, em uma grande pedra negra no meio de uma floresta escura.</p>
         <p>Pare e pense um pouco no que fazer.</p>
@@ -21,7 +21,6 @@
 <!-- SPLIT FOR SCRIPT -->
 <script>
     /* button script */
-    console.log("Example button LOG");
     next("actions");
 </script>
 
@@ -29,10 +28,17 @@
 <!-- SPLIT FOR SCRIPT -->
 <script>
     /* page script */
-    
+
     game.placeInfo = {
         title: document.querySelector(".placeTitle").innerHTML,
         desc: document.querySelector(".placeDesc").innerHTML
     }
-    document.getElementById("steps").innerHTML = game.steps; 
+    if(game.inspectPlace){
+        document.getElementById("steps").innerHTML = game.steps;
+        document.querySelector(".contentContent").innerHTML = `<div class='subContainer placeInfo'> <h2>`+document.querySelector(".contentHeader h1").innerHTML+`</h2> <br>` +document.querySelector(".contentContent").innerHTML+ `</div>`;
+        document.querySelector(".contentHeader h1").innerHTML = "Inspecionando";
+        game.inspectPlace = false;
+    } else {
+        document.getElementById("steps").innerHTML = ++game.steps;
+    }
 </script>

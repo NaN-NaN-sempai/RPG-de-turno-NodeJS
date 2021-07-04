@@ -23,7 +23,8 @@
     }, e=>{
         game.player = e;
         game.difficult = serverData.modules.difficulties.find(e=>e.name == tempOptions.difficult);
-        game.steps = game.stepsToStore = 1;
+        game.inspectPlace = false;
+        game.steps = game.stepsToStore = 0;
         goTo("beginning");
     }); 
 </script>

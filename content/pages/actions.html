@@ -6,9 +6,10 @@
     <div class="contentContent">
         <div class="subContainer placeInfo"></div>
         <div class="subContainer actions">
-            <button>Inspecionar local</button>
-            <button>Checar inventario</button>
-            <button>Continuar andando</button>
+            <button id="inspectPlace">Inspecionar Local</button>
+            <button id="inspectPlayer">Checar Você</button>
+            <button id="openInventory">Checar Inventario</button>
+            <button id="continueWalking">Continuar Andando <br>></button>
         </div>
     </div>
 
@@ -33,5 +34,12 @@
     
     document.getElementById("steps").innerHTML = game.steps;
 
-    Array.from(document.querySelector(".subContainer.actions").querySelectorAll("button")).forEach(e=>e.onclick = ()=>alert("Working in progress"));
+    document.getElementById("inspectPlace").addEventListener("click", ()=>{
+        game.inspectPlace = true;
+        goTo("--lastPage");
+    });
+
+    document.getElementById("openInventory").onclick =
+    document.getElementById("continueWalking").onclick =
+    document.getElementById("inspectPlayer").onclick = ()=>alert("Working in progress");
 </script>

@@ -52,10 +52,10 @@
         next("choseInfo");
     });
     var randomName = (obj, callbackFunction) => {
-        axios.post("/randomName", typeof obj != "object"?undefined: obj).then(e => (typeof obj == "function"?obj:callbackFunction)(e.data));
+        axios.post("/randomName", typeof obj != "object"?undefined: obj).then(e => (callbackFunction || obj)(e.data));
     }
     var newEntity = (type, obj, callbackFunction) => {
-        axios.post("/newEntity", [type, typeof obj != "object"?undefined: obj]).then(e => (typeof obj == "function"?obj:callbackFunction)(e.data));
+        axios.post("/newEntity", [type, obj]).then(e => callbackFunction(e.data));
     } 
 
 
@@ -82,11 +82,17 @@
         }
     }
     var goTo = (name) => {
-        if(name == "random"){
+        name = name == "--lastPage"? lastPage: "place_"+name;
+        if(typeof actualPage != "undefined"){
+            pageHistory.push(actualPage);
+            lastPage = pageHistory[pageHistory.length-1]; 
+        }
+        actualPage = name; 
+        if(name == "place_random"){
             var places = serverData.pages.filter(e=>e.name.includes("place_") && !e.name.includes("beginning"));
         } else { 
             var allPlaces = serverData.pages.filter(e=>e.name.includes("place_")); 
-            var page = allPlaces.find(e=>e.name == "place_"+name);
+            var page = allPlaces.find(e=>e.name == name);
             next(page.name);
         }
     }
