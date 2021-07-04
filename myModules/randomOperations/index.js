@@ -13,7 +13,7 @@ exports.randomNumberFromTo = exports.rnft = rnft;
 exports.randomPorcentage = exports.rp = rp;
 
 var text = "";
-Object.entries(exports).forEach(e=>text+="window['"+e[0]+"'] ="+e[1]+"; ");
+Object.entries(exports).forEach(e=>text+="window['"+e[0]+"']="+e[1]+"; ");
 
 exports.evalText = text;
 
