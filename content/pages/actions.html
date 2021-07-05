@@ -7,7 +7,7 @@
         <div class="subContainer placeInfo"></div>
         <div class="subContainer actions">
             <button id="inspectPlace">Inspecionar Local</button>
-            <button id="inspectPlayer">Checar Você</button>
+            <button id="inspectPlayer">Inspecionar Você</button>
             <button id="openInventory">Checar Inventario</button>
             <button id="continueWalking">Continuar Andando <br>></button>
         </div>
@@ -38,8 +38,10 @@
         game.inspectPlace = true;
         goTo("--lastPage");
     });
-
-    document.getElementById("openInventory").onclick =
+    document.getElementById("openInventory").addEventListener("click", ()=>{
+        next("inventory");
+    });
+    
     document.getElementById("continueWalking").onclick =
     document.getElementById("inspectPlayer").onclick = ()=>alert("Working in progress");
 </script>

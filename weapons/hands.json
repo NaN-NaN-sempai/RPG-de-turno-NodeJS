@@ -1,4 +1,7 @@
 {
-    "name": "Hands",
-    "demage": 1
+    "id": "hands",
+    "name": "Mãos",
+    "demage": 1,
+    "desc": "Simplesmente, suas mãos.",
+    "dropable": false
 }

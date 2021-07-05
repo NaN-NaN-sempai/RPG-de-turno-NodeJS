@@ -1,0 +1,41 @@
+<div class="innerMainCon">
+    <div class="contentHeader">
+        <h1>Tem certeza que quer jogar fora?</h1>
+    </div>
+    
+    <div class="contentContent"> 
+        <div class="subContainer placeInfo">
+            <i><h2 class="placeTitle"></h2></i>
+            <br>
+            <p class="placeDesc"></p>
+            <br>
+        </div>
+        <div class="subContainer">
+            <p class="placeStats"></p>
+        </div>
+    </div>
+
+    <button class="next continue" data-before="Voltar">&#60;</button> 
+    <button class="next goBack" data-before="Jogar">></button>
+</div>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* button script */ 
+    next("--lastPage");
+</script>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* page script */
+    document.querySelector(".goBack").addEventListener("mouseup", ()=>{
+        game.player.inventory = game.player.inventory.filter(e=>e!=game.inspectWeapon);
+        game.player.equipedIndex = game.inspectWeapon.index == game.player.equipedIndex? 0: game.player.equipedIndex;
+        next("inventory");
+    });
+    document.querySelector(".placeTitle").innerHTML = game.inspectWeapon.name + (game.inspectWeapon.index == game.player.equipedIndex? " (Equipado)": "");
+    document.querySelector(".placeDesc").innerHTML = game.inspectWeapon.desc;
+    document.querySelector(".placeStats").innerHTML = "Dano: <b>" + game.inspectWeapon.demage+"</b>";
+</script>

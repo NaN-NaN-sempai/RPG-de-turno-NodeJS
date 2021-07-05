@@ -1,5 +1,6 @@
 {
-    "name": "Human",
+    "id": "human",
+    "name": "Humano",
     "bonuses": {
         "hp": 0,
         "mp": 0

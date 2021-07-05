@@ -1,4 +1,7 @@
 {
-    "name": "example",
-    "demage": 1
+    "id": "example",
+    "name": "Example",
+    "demage": 1,
+    "desc": "descrição da arma",
+    "dropable": true
 }

@@ -1,0 +1,37 @@
+<div class="innerMainCon">
+    <div class="contentHeader">
+        <h1>Inventario</h1>
+    </div>
+    
+    <div class="contentContent"> 
+        <div class="subContainer placeInfo"><h2>Selecione um item:</h2></div>
+        <div class="subContainer actions"></div>
+    </div>
+
+    <button class="next continue" data-before="Voltar">&#60;</button>
+</div>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* button script */
+    next("actions");
+</script>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* page script */
+    var weaponContainer = document.querySelector(".actions");
+    var filteredList = game.player.inventory.sort((a,b)=>b.demage - a.demage);
+    filteredList.forEach(e => {
+        var button = document.createElement("button");
+            button.className = (e.index == game.player.equipedIndex?"equiped": "");
+            button.innerHTML = e.name;
+            button.addEventListener("click", ()=>{
+                game.inspectWeapon = e;
+                next("inspectWeapon");
+            })
+        weaponContainer.append(button);
+    });
+</script>

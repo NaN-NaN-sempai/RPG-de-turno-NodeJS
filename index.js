@@ -6,6 +6,7 @@ var app = express();
 
 var classes = require("./classes");
 var races = require("./races");
+var weapons = require("./weapons");
 var difficulties = require("./difficulties");
 
 var fs = require("fs");
@@ -82,7 +83,8 @@ app.get("/serverData", (req, res) => {
     res.json({
         modules: {
             races: races,
-            difficulties: difficulties
+            difficulties: difficulties,
+            weapons: weapons
         },
         pages: pages,
         randomOperations: randomOperations.evalText

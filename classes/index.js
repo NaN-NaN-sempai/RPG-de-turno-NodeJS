@@ -2,40 +2,36 @@ var weapons = require("../weapons");
 var races = require("../races")
 var generateRandomName = require("../myModules/randomNameGenerator");
 
+var parseIndexToObject = (index, list) => {
+    var obj = typeof index == "string"? list.find(e=>e.id == index.toLowerCase()):
+              typeof index == "number"? list[index]: 
+              index;
+
+    if(typeof obj == "undefined") throw "Objeto não encontrado";
+
+    return obj;
+}
+
 class weapon{
     constructor(index){
-        var list = weapons;
-        var obj = typeof index == "string"? list.find(e=>e.name == index):
-                  typeof index == "number"? list[index]: 
-                  index;
-        
-        if(typeof obj == "undefined") throw ""
-
-        Object.assign(this, obj);
+        Object.assign(this, parseIndexToObject(index, weapons));
     }
 }
 
 class race {
     constructor(index){
-        var list = races;
-        var obj = typeof index == "string"? list.find(e=>e.name == index):
-                  typeof index == "number"? list[index]: 
-                  index;
-        
-        if(typeof obj == "undefined") throw ""
-
         this.race = {}
-        Object.assign(this.race, obj);
+        Object.assign(this.race, parseIndexToObject(index, races));
     }
 }
 
 class entity extends race {
     constructor(obj){
-        if(typeof obj != "object") throw ""
+        if(typeof obj != "object") throw "O constructor precisa receber valores em Objetos";
 
-        super(obj.race? obj.race: "Human");
+        super(obj.race || "Human");
 
-        this.name = obj.name?obj.name:generateRandomName();
+        this.name = obj.name || generateRandomName();
 
         this.fullHp = obj.fullHp || 100;
         this.hp = obj.hp || this.fullHp;
@@ -43,8 +39,19 @@ class entity extends race {
         this.fullMp = obj.fullMp || 100;
         this.mp = obj.mp || this.fullMp;
 
-        this.inventory = [new weapon("Hands")];
-        this.equiped = this.inventory[0];
+        this.weaponId = 0;
+        this.inventory = [];
+        var pushWeapon = (weaponName) => { 
+            var newWeapon = new weapon(weaponName);
+            newWeapon.index = this.weaponId++;
+            this.inventory.push(newWeapon);
+        }
+        pushWeapon(obj.firstWeapon || "Hands");
+
+        obj.inventory?.forEach(e=>{
+            pushWeapon(e);
+        });
+        this.equipedIndex = obj.equiped || 0;
 
         obj.resistences = {}
         obj.status = {}

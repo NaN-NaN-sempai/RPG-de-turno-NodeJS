@@ -1,4 +1,7 @@
 {
-    "name": "Rusty Sword",
-    "demage": 5
+    "id": "rusty_sword",
+    "name": "Espada Enferrujada",
+    "demage": 5,
+    "desc": "working in pregress",
+    "dropable": true
 }

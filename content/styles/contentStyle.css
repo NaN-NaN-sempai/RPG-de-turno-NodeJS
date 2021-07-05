@@ -4,6 +4,10 @@
     --mainColor: burlywood;
     --mainColorDark: rgb(141, 114, 78);
     --mainColorLight: rgb(248, 206, 150);
+    --mainBorderStyle: solid black 2px;
+    --equipedOutlineColor: rgb(0, 153, 255);
+    --undropable: grey;
+    --undropableTxtColor: rgb(56, 56, 56);
 }
 
 * {
@@ -18,7 +22,6 @@
 }
 
 .subContainer {
-    width: 100%;
     background: var(--containterBGC);
     margin-top: 10px;
 }
@@ -33,6 +36,7 @@
 }
 
 .contentContent {
+    height: 100%;
     padding: 10px;
 }
 
@@ -94,13 +98,15 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    max-height: 75%;
+    overflow-y: overlay;
 }
 .actions button {
     width: 100px;  
     height: 100px;  
     margin: 5px;
     border-radius: 20px;
-    border: solid black 2px;
+    border: var(--mainBorderStyle);
     background: var(--mainColorLight);
 }
 .actions button:hover {
@@ -108,4 +114,27 @@
 }
 .actions button:active {
     background: var(--mainColorDark);
+}
+.actions button.equiped {
+    background: radial-gradient(var(--mainColorLight) 60%, var(--equipedOutlineColor));
+}
+.actions button.equiped:hover {
+    background: radial-gradient(var(--mainColor) 60%, var(--equipedOutlineColor));
+}
+.actions button.equiped:active {
+    background: radial-gradient(var(--mainColorDark) 60%, var(--equipedOutlineColor));
+}
+.actions button.undropable {
+    background: radial-gradient(var(--mainColorDark) 60%, var(--undropable));
+    color: var(--undropableTxtColor);
+}
+
+
+::-webkit-scrollbar {
+    display: block;
+    width: 7px
+}
+::-webkit-scrollbar-thumb { 
+    background: var(--mainColorLight);
+    border-radius: 10px;
 }

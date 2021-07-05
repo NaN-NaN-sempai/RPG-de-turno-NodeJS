@@ -34,7 +34,11 @@
     }
 
     Array.from(document.querySelectorAll(".sendInfo")).forEach(e=>{
-        tempOptions[e.id] = (e.querySelector("input") || e.querySelector("select")).value;
+        if(e.id == "race"){ 
+            tempOptions[e.id] = serverData.modules.races[e.querySelector("select").value];
+        } else {
+            tempOptions[e.id] = (e.querySelector("input") || e.querySelector("select")).value;
+        }
     });
     
     next("areYouSure");
@@ -45,9 +49,10 @@
 <script>
     /* page script */
 
-    serverData.modules.races.forEach(e=>{
+    serverData.modules.races.forEach((e,i)=>{
         var option = document.createElement("option");
-            option.value = option.innerHTML = e.name;
+            option.value = i;
+            option.innerHTML = e.name;
         document.getElementById("race").querySelector("select").append(option);
     });
 

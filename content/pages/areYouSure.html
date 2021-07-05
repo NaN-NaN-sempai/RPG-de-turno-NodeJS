@@ -19,7 +19,8 @@
     /* button script */
     newEntity("entity", {
         name: tempOptions.name,
-        race: tempOptions.race
+        race: tempOptions.race.id,
+        inventory: ["rusty_sword","rusty_sword","rusty_sword","rusty_sword","rusty_sword","rusty_sword"]
     }, e=>{
         game.player = e;
         game.difficult = serverData.modules.difficulties.find(e=>e.name == tempOptions.difficult);
@@ -38,6 +39,10 @@
     });
 
     Array.from(document.querySelectorAll(".contentContent p b")).forEach(e => {
-        e.innerHTML = tempOptions[e.id];
+        if(e.id == "race"){
+            e.innerHTML = tempOptions[e.id].name;
+        } else {
+            e.innerHTML = tempOptions[e.id];
+        }
     });
 </script>

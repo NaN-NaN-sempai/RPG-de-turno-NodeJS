@@ -1,0 +1,71 @@
+<div class="innerMainCon">
+    <div class="contentHeader">
+        <h1>Inspecionando</h1>
+    </div>
+    
+    <div class="contentContent"> 
+        <div class="subContainer placeInfo">
+            <i><h2 class="placeTitle"></h2></i>
+            <br>
+            <p class="placeDesc"></p>
+            <br>
+        </div>
+        <div class="subContainer">
+            <p class="placeStats"></p>
+        </div>
+        <div class="subContainer actions">
+            <button id="equip">Equipar</button>
+            <button id="drop">Jogar Fora</button>
+        </div>
+    </div>
+
+    <button class="next continue" data-before="Voltar">&#60;</button>
+</div>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* button script */
+    next("inventory");
+</script>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* page script */
+    document.querySelector(".placeTitle").classList.add(game.inspectWeapon.rarity || "weaponRarity"); // PREPARAÇÃO
+    document.querySelector(".placeTitle").innerHTML = game.inspectWeapon.name + (game.inspectWeapon.index == game.player.equipedIndex? " (Equipado)": "");
+    document.querySelector(".placeDesc").innerHTML = game.inspectWeapon.desc;
+    document.querySelector(".placeStats").innerHTML = "Dano: <b>" + game.inspectWeapon.demage+"</b>";
+
+    if(game.inspectWeapon.index == game.player.equipedIndex){
+        document.getElementById("equip").classList.add("equiped");
+        document.getElementById("equip").innerHTML = "Desequipar";
+    }
+
+    if(game.inspectWeapon.id != "hands"){
+        document.getElementById("equip").addEventListener("click", function(){
+            game.player.equipedIndex = this.classList.contains("equiped")? 0: game.inspectWeapon.index;
+            next("inventory");
+        });
+    } else {
+        if(game.inspectWeapon.index == game.player.equipedIndex){ 
+            document.getElementById("equip").title = "Você não pode desequipar suas mãos, tente equipar alguma outra arma ao envez disso";
+            document.getElementById("equip").className = "undropable";
+        } else { 
+            document.getElementById("equip").addEventListener("click", function(){
+                game.player.equipedIndex = game.inspectWeapon.index;
+                next("inventory");
+            });
+        }
+    }
+
+    if(game.inspectWeapon.dropable){
+        document.getElementById("drop").addEventListener("click", ()=>{
+            next("areYouSureToDrop");
+        });
+    } else {
+        document.getElementById("drop").className = "undropable";
+        document.getElementById("drop").title = "Você não pode jogar "+ game.inspectWeapon.name +" fora";
+    }
+</script>
