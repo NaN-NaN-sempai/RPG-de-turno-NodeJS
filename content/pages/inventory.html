@@ -26,11 +26,11 @@
     var filteredList = game.player.inventory.sort((a,b)=>b.demage - a.demage);
     filteredList.forEach(e => {
         var button = document.createElement("button");
-            button.className = (e.index == game.player.equipedIndex?"equiped": "");
+            button.className = (e.index == game.player.equipedIndex?"equiped ": "")+"decorateBtn";
             button.innerHTML = e.name;
             button.addEventListener("click", ()=>{
                 game.inspectWeapon = e;
-                next("inspectWeapon");
+                next("inventory_inspectWeapon");
             })
         weaponContainer.append(button);
     });

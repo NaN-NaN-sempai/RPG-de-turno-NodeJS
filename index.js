@@ -21,11 +21,12 @@ var pagesIndex = "./content/pages";
 var loadPages = () => {
     fs.readdirSync(pagesIndex).forEach(fileName => { 
         var file = fs.readFileSync(pagesIndex+"/"+fileName, 'utf8').split("<!-- SPLIT FOR SCRIPT -->");
+
         pages.push({
             name: fileName.replace(".html", ""),
             content: file[0],
-            button: file[1]?.replace("<script>", "").replace("</script>", ""),
-            script: file[2]?.replace("<script>", "").replace("</script>", "")
+            button: file.find(e=>e.includes("/* button script */"))?.replace("<script>", "").replace("</script>", ""),
+            script: file.find(e=>e.includes("/* page script */"))?.replace("<script>", "").replace("</script>", "")
         });
     });
 }
@@ -98,5 +99,9 @@ app.listen(port, () => {
     require('dns').lookup(require('os').hostname(), function (err, add, fam) {
         console.log("Ip Link:", '\x1b[36m', 'http://'+ add + ":" + port +"/",'\x1b[0m');
         console.log("Localhost Link:", '\x1b[36m', 'http://localhost:' + port +"/",'\x1b[0m');
+
+        var url = 'http://localhost:'+port;
+        var start = (process.platform == 'darwin'? 'open': process.platform == 'win32'? 'start': 'xdg-open');
+        require('child_process').exec(start + ' ' + url);
     });
 });

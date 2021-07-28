@@ -6,10 +6,10 @@
     <div class="contentContent">
         <div class="subContainer placeInfo"></div>
         <div class="subContainer actions">
-            <button id="inspectPlace">Inspecionar Local</button>
-            <button id="inspectPlayer">Inspecionar Você</button>
-            <button id="openInventory">Checar Inventario</button>
-            <button id="continueWalking">Continuar Andando <br>></button>
+            <button class="decorateBtn" id="inspectPlace">Inspecionar Local</button>
+            <button class="decorateBtn" id="inspectPlayer">Inspecionar Você</button>
+            <button class="decorateBtn" id="openInventory">Checar Inventario</button>
+            <button class="decorateBtn" id="continueWalking">Continuar Andando <br>></button>
         </div>
     </div>
 
@@ -21,7 +21,7 @@
 
 <!-- SPLIT FOR SCRIPT -->
 <script>
-    /* button script */ 
+    /* button script */
 </script>
 
 
@@ -38,10 +38,14 @@
         game.inspectPlace = true;
         goTo("--lastPage");
     });
+
+    document.getElementById("inspectPlayer").addEventListener("click", ()=>{
+        next("inspectPlayer");
+    }); 
+
     document.getElementById("openInventory").addEventListener("click", ()=>{
         next("inventory");
     });
     
-    document.getElementById("continueWalking").onclick =
-    document.getElementById("inspectPlayer").onclick = ()=>alert("Working in progress");
+    document.getElementById("continueWalking").onclick = ()=>alert("Working in progress");
 </script>

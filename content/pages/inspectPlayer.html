@@ -1,0 +1,72 @@
+<div class="innerMainCon">
+    <div class="contentHeader">
+        <h1>Inspecionando Você</h1>
+    </div>
+    
+    <div class="contentContent">
+        <!-- Conteudo da pagina -->
+        <div class='subContainer'>
+            <h2> placeholder_nome </h2>
+            <p><b><span id="race"> placeholder_raca </span></b></p>
+            <br>
+            <p>Vida: <b><span id="hp"></span> / <span id="hpmax"></span></b></p> 
+            <div id="statusBarHp" class="statusBar"></div>
+            <br>
+            <p>Mana: <b><span id="mp"></span> / <span id="mpmax"></span></b></p>
+            <div id="statusBarMp" class="statusBar"></div>
+            <br>
+            <p>Resistncias: <b>WORKING IN PROGRESS!</b></p>
+            <br>
+            <p>Status: <b>WORKING IN PROGRESS!</b></p>
+            <br>
+            <p>Equipado: <button class="decorateBtn" id="equiped"> placeholder_armaEquipada </button></p> 
+            <p>Inventario: <button class="decorateBtn" id="inventario"> placeholder_quantidadeDeArmas </button></p>
+            <br>
+            <p>Dificuldade: <b><span id="difficult"> placeholder_dificuldade</span></b></p>
+        </div>
+    </div>
+
+    <button class="next continue" data-before="Voltar">&#60;</button>
+</div>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* button script */ 
+    next("actions"); 
+</script>
+
+
+<!-- SPLIT FOR SCRIPT -->
+<script>
+    /* page script */
+    document.querySelector("h2").innerHTML = game.player.name;
+    document.querySelector("#race").innerHTML = "("+game.player.race.name+")";
+    
+    document.querySelector("#difficult").innerHTML = game.difficult.name;
+
+    /* VIDA */
+    document.querySelector("#hp").innerHTML = game.player.hp;
+    document.querySelector("#hpmax").innerHTML = game.player.fullHp;
+    var hpporc = (game.player.hp/game.player.fullHp) * 100;
+    getStyle("#statusBarHp").style.background = "linear-gradient(to right, var(--hpUpper) "+ hpporc +"%, var(--hpUnder) "+ hpporc +"%)";
+    
+    /* MANA */
+    document.querySelector("#mp").innerHTML = game.player.mp;
+    document.querySelector("#mpmax").innerHTML = game.player.fullMp;
+    var mpporc = (game.player.mp/game.player.fullMp) * 100;
+    getStyle("#statusBarMp").style.background = "linear-gradient(to right, var(--mpUpper) "+ mpporc +"%, var(--mpUnder) "+ mpporc +"%)";
+
+    /* ARMA EQUIPADA */
+    document.querySelector("#equiped").innerHTML = game.player.inventory.find(e=>e.index==game.player.equipedIndex).name;
+    document.querySelector("#equiped").addEventListener("click", ()=>{
+        game.inspectWeapon = game.player.inventory.find(e=>e.index==game.player.equipedIndex);
+        next("inventory_inspectWeapon");
+    });
+
+    /* INVENTARIO */
+    document.querySelector("#inventario").innerHTML = (game.player.inventory.length-1) + " arma" + (game.player.inventory.length-2?"s":"");
+    document.querySelector("#inventario").addEventListener("click", ()=>{
+        next("inventory");
+    });
+</script>

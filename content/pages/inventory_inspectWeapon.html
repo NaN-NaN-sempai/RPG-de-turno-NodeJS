@@ -14,8 +14,8 @@
             <p class="placeStats"></p>
         </div>
         <div class="subContainer actions">
-            <button id="equip">Equipar</button>
-            <button id="drop">Jogar Fora</button>
+            <button class="decorateBtn" id="equip">Equipar</button>
+            <button class="decorateBtn" id="drop">Jogar Fora</button>
         </div>
     </div>
 
@@ -36,7 +36,7 @@
     document.querySelector(".placeTitle").classList.add(game.inspectWeapon.rarity || "weaponRarity"); // PREPARAÇÃO
     document.querySelector(".placeTitle").innerHTML = game.inspectWeapon.name + (game.inspectWeapon.index == game.player.equipedIndex? " (Equipado)": "");
     document.querySelector(".placeDesc").innerHTML = game.inspectWeapon.desc;
-    document.querySelector(".placeStats").innerHTML = "Dano: <b>" + game.inspectWeapon.demage+"</b>";
+    document.querySelector(".placeStats").innerHTML = "Dano: <b>" + game.inspectWeapon.demage + "</b>";
 
     if(game.inspectWeapon.index == game.player.equipedIndex){
         document.getElementById("equip").classList.add("equiped");
@@ -51,7 +51,7 @@
     } else {
         if(game.inspectWeapon.index == game.player.equipedIndex){ 
             document.getElementById("equip").title = "Você não pode desequipar suas mãos, tente equipar alguma outra arma ao envez disso";
-            document.getElementById("equip").className = "undropable";
+            document.getElementById("equip").className += " undropable";
         } else { 
             document.getElementById("equip").addEventListener("click", function(){
                 game.player.equipedIndex = game.inspectWeapon.index;
@@ -62,10 +62,10 @@
 
     if(game.inspectWeapon.dropable){
         document.getElementById("drop").addEventListener("click", ()=>{
-            next("areYouSureToDrop");
+            next("inventory_areYouSureToDrop");
         });
     } else {
-        document.getElementById("drop").className = "undropable";
         document.getElementById("drop").title = "Você não pode jogar "+ game.inspectWeapon.name +" fora";
+        document.getElementById("drop").className += " undropable";
     }
 </script>

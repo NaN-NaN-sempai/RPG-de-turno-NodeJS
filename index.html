@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
+    <style title="main">
         * {
             outline: none;
             user-select: none;
@@ -61,28 +61,27 @@
 
 
     var pageHistory = [];
-    var actualPage, lastPage;
+    var actualPage, lastPage, tryedPage;
     var next = (name) => { 
         name = name == "--lastPage"? lastPage: name;
-        var page = serverData.pages.find(e => e.name == name);
+        tryedPage = name;
+        var page = serverData.pages.find(e => e.name == name) || serverData.pages.find(e => e.name == "config_notFound");
 
-        if(typeof page != "undefined"){
-            if(typeof actualPage != "undefined"){
-                pageHistory.push(actualPage);
-                lastPage = pageHistory[pageHistory.length-1]; 
-            }
-            actualPage = name; 
+        if(typeof actualPage != "undefined"){
+            pageHistory.push(actualPage);
+            lastPage = pageHistory[pageHistory.length-1]; 
+        }
+        actualPage = name; 
 
-            container.innerHTML = page.content;
+        container.innerHTML = page.content;
 
-            setHover(page);
+        setHover(page);
 
-            if(typeof page.script != "undefined"){
-                eval(page.script); 
-            }
+        if(typeof page.script != "undefined"){
+            eval(page.script); 
         }
     }
-    var lastPlace;
+    var lastPlace, tryedPlace;
     var goTo = (name) => {
         name = name == "--lastPage"? lastPlace: "place_"+name;
         lastPlace = name; 
@@ -91,7 +90,7 @@
         } else { 
             var allPlaces = serverData.pages.filter(e=>e.name.includes("place_")); 
             var page = allPlaces.find(e=>e.name == name); 
-            next(page.name);
+            next(page?.name || name);
         }
     }
 
@@ -109,10 +108,19 @@
                     e.style.width = calc; 
                 });
                 e.addEventListener("mouseout", ()=>{
-                    e.style.width = "50px"; 
+                    e.style.width = "50px";     
                 });
             })
         }
+    }
+
+    var getStyle = (selector, choosenStyleSheet = "contentStyle") => {
+        var retStyle = () => Array.from(Array.from(document.styleSheets).find(e=>e.href?.includes(choosenStyleSheet)).cssRules).find(e=>e.selectorText == selector);
+        var endStyle = retStyle();
+        if(!endStyle){
+            Array.from(document.styleSheets).find(e=>e.href?.includes(choosenStyleSheet)).insertRule(selector + "{}", 0);  
+        }
+        return retStyle();
     }
 </script>
 
