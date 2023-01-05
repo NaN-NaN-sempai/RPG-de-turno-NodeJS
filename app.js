@@ -93,7 +93,7 @@ app.get("/serverData", (req, res) => {
     res.end();
 });
 
-var port = 80;
+var port = 3000;
 app.listen(port, () => {
     console.log('\x1b[33m%s\x1b[0m', "Server Started.");
     require('dns').lookup(require('os').hostname(), function (err, add, fam) {
